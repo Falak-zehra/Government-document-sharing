@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docs</title>
+</head>
+<body>
+   
+    <div class="upload">
+        <h2 class="headfile">Upload files</h2>
+        <input type="file" class="file" multiple = "" accept = ".doc,.docx,.pdf">
+       <br>
+       
+       <div class="uploadsuccess "></div>
+        
+    
+    <button><a href="submit.html">Go to Profile=></a></button>
+    </div>
+    <style>
+        
+        .upload{
+           
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            
+            
+    
+        }
+        .file{
+            font-size: 20px;
+            
+        }
+        .uploadsuccess {
+            font-size: 20px;
+        }
+        body{
+            background-color: aliceblue;
+        }
+    
+    
+        
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js"></script>
+    
+    
+    <script>
+        const firebaseConfig = {
+        apiKey: "AIzaSyBDeKp1DW_HM0pRes0SjHwx_hJFJagFexo",
+        authDomain: "govt-docs-da64d.firebaseapp.com",
+        projectId: "govt-docs-da64d",
+        storageBucket: "govt-docs-da64d.appspot.com",
+        messagingSenderId: "88829926121",
+        appId: "1:88829926121:web:7bcb051c5795d41baf2e78"
+      };
+    
+      // Initialize Firebase
+      const firebaseApp =firebase.initializeApp(firebaseConfig);
+    
+      
+       const db = firebaseApp.firestore();
+       const auth = firebaseApp.auth();
+    
+       const storage = firebase.storage();
+    
+      
+    
+       const file = document.querySelector(".file");
+       const upload = document.querySelector(".upload");
+       const uploadsuccess = document.querySelector(".uploadsuccess");
+       
+    
+       file.addEventListener('change',function(e){
+        for(let i = 0 ; i< e.target.files.length; i++){
+            let docfile = e.target.files[i];
+            let storageRef = firebase.storage().ref("files/" + docfile.name);
+            let task = storageRef.put(docfile);
+            task.on('state_changed', function progress(snapshot){
+                let percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+                console.log("upload is " + percentage + "%done");
+                switch (snapshot.state){
+                    case firebase.storage.TaskState.PAUSED:
+                       uploadsuccess.innerHTML = "upload is paused";
+                        break;
+                        case firebase.storage.TaskState.RUNNING:
+                        uploadsuccess.innerHTML = "upload is running";
+                        
+                        case percentage==100:
+                         uploadsuccess.innerHTML = "upload successfully";
+                         uploadsuccess.style.color = "green";
+                         break;
+                         default :
+                         uploadsuccess.innerHTML = "Error";
+                         uploadsuccess.style.color = "red";
+    
+                        
+    
+                        
+    
+    
+                }
+               
+    
+        
+        }
+    )
+    
+           
+            
+          
+                
+        }
+    }
+       )
+       
+       
+      
+        
+       
+    </script>
+</body>
+</html>

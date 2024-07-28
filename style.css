@@ -1,0 +1,70 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
+nav li {
+    display: inline;
+    padding: 2px;
+   
+   border-radius: 10px;
+   margin: 5px;
+   font-size: 20px;
+   
+
+
+    
+
+}
+nav li a{
+    text-decoration: none;
+    color: white;
+}
+
+
+.list{
+   float: right;
+   
+
+
+
+
+}
+nav{
+   
+    padding: 5px;
+    
+    width : 100%;
+    height: 30px;
+    background-color: #FF7F50;
+    color: white;
+}
+    
+
+.portal{
+float: left;
+font-size: 25px;
+}
+section{
+    text-align: center;
+    padding: 2rem;
+    font-size: larger;
+   
+}
+.btn{
+    display: inline-block;
+    color: white;
+    box-sizing: border-box;
+    background-color: blue;
+    border: solid 2px black;
+    padding: 5px;;
+    border-radius: 5px;
+    
+    
+}
+.btn:hover{
+color: red;
+}
+
+
